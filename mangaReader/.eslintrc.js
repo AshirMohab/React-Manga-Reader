@@ -16,15 +16,16 @@ module.exports = {
   },
   plugins: [`react`, `@typescript-eslint`],
   rules: {
+    "linebreak-style": 0,
     quotes: [`error`, `backtick`],
-    'react/jsx-filename-extension': [
+    "react/jsx-filename-extension": [
       1,
       { extensions: [`.js`, `.jsx`, `.ts`, `.tsx`] },
     ],
-    'import/extensions': [`error`, `never`],
+    "import/extensions": [`error`, `never`],
   },
   settings: {
-    'import/resolver': {
+    "import/resolver": {
       typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
     },
   },
