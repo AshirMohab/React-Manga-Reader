@@ -16,6 +16,7 @@ module.exports = {
   },
   plugins: [`react`, `@typescript-eslint`],
   rules: {
+    "implicit-arrow-linebreak": false,
     "linebreak-style": 0,
     quotes: [`error`, `backtick`],
     "react/jsx-filename-extension": [
