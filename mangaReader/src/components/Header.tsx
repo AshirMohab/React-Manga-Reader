@@ -22,9 +22,6 @@ export default function HearderCard(props: HeadProps) {
       {tags.map((tag) => (
         <Nav name={tag} key={tag} />
       ))}
-      <button className="bg-blue-500 py-2 sm:py-3 px-6 rounded-lg shadow-lg shadow-glow text-white">
-        Get Started
-      </button>
     </ul>
   );
 }

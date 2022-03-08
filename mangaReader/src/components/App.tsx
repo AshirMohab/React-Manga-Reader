@@ -7,7 +7,7 @@ function App() {
   return (
     <div
       id="HomePage"
-      className="grid grid-rows-1 w-[100%] h-[100%] bg-slate-100 "
+      className="grid grid-rows-2 w-[100%] h-[100%] bg-slate-100 "
     >
       <div
         id="Header"
@@ -19,7 +19,9 @@ function App() {
             MANGADEX
           </div>
         </div>
-        <HeaderCard tags={["Home", "Manga", "18+", "Genres"]}></HeaderCard>
+        <HeaderCard
+          tags={["Home", "Manga", "18+", "Genres", "Login", "Sign-up"]}
+        ></HeaderCard>
       </div>
       <SearchBarComponent />
     </div>
