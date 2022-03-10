@@ -1,7 +1,7 @@
 import "../css/App.css";
 import React from "react";
 import HeaderCard from "./Header";
-import SearchBarComponent from "./SearchBar";
+import MangaCompnent from "./MangaID";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
           tags={["Home", "Manga", "18+", "Genres", "Login", "Sign-up"]}
         ></HeaderCard>
       </div>
-      <SearchBarComponent />
+      <MangaCompnent />
     </div>
   );
 }
