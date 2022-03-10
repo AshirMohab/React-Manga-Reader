@@ -1,15 +1,15 @@
 import "../css/App.css";
 import React from "react";
 import HeaderCard from "./Header";
-import MangaCompnent from "./MangaID";
+import MangaComponent from "./MangaID";
 
 function App() {
   return (
     <div
       id="HomePage"
-      className="grid grid-rows-2 w-[100%] h-[100%] bg-slate-100 "
+      className="grid-rows-2 w-[100%] h-[100%] bg-slate-100 flex flex-col "
     >
-      <div
+      <header
         id="Header"
         className="my-6 flex flex-wrap items-center justify-center xl:justify-end"
       >
@@ -22,8 +22,12 @@ function App() {
         <HeaderCard
           tags={["Home", "Manga", "18+", "Genres", "Login", "Sign-up"]}
         ></HeaderCard>
+      </header>
+      <div id="Home" className="h-[100%] m-6 px-4">
+        <div id="mangaCard" className="bg-slate-50 p-6">
+          <MangaComponent />
+        </div>
       </div>
-      <MangaCompnent />
     </div>
   );
 }
