@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import mangaPopularityReducer from "./todoSlice";
+import mangaPopularityReducer from "./mangaSlice";
 
 export const rtkstore = configureStore({
   reducer: {

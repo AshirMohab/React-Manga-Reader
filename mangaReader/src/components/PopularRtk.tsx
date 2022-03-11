@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../reduxStore/rtkStore";
-import { addFavourite, setStatus } from "../reduxStore/todoSlice";
+import { addFavourite, setStatus } from "../reduxStore/mangaSlice";
 import { MangaPopularityState } from "../reduxStore/types";
 
 export default function PopularRtk() {
