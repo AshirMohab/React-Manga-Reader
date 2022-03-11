@@ -5,8 +5,11 @@ import MangaComponent from "./MangaID";
 import { Provider } from "react-redux";
 import { rtkstore } from "../reduxStore/rtkStore";
 import PopularRtk from "./PopularRtk";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { MangaCardReactQueryComponent } from "./MangaReactQuery";
 
 function App() {
+  const queryClient = new QueryClient();
   return (
     <div className="grid grid-rows-1 w-[100%] h-[100%] bg-slate-100 ">
       <header className="my-6 flex flex-wrap items-center justify-center xl:justify-end">
@@ -21,13 +24,20 @@ function App() {
         ></HeaderCard>
       </header>
       <div className="h-[100%] m-6 px-4 md:grid md:grid-cols-3 gap-16 md:grid-rows-2  justify-center flex flex-row">
-        <div className="bg-slate-50 p-6">
+        {/* <div className="bg-slate-50 p-6">
           <MangaComponent />
+        </div> */}
+        {/* <div>
+          <Provider store={rtkstore}>
+            <PopularRtk />
+          </Provider>
+        </div> */}
+        <div>
+          <QueryClientProvider client={queryClient}>
+            <MangaCardReactQueryComponent />
+          </QueryClientProvider>
         </div>
       </div>
-      <Provider store={rtkstore}>
-        <PopularRtk />
-      </Provider>
     </div>
   );
 }
