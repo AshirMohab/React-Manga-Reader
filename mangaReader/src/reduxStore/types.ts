@@ -4,9 +4,10 @@ export enum MangaPopularityState {
   CURIOUS = "curious",
 }
 
-export type Popularity = {
+export type MangaPopularity = {
   id: string;
-  task: string;
+  author: string;
+  coverUrl: string;
   status: MangaPopularityState;
 };
 
@@ -16,7 +17,10 @@ export enum PopularAction {
 }
 
 export type ActionTypes =
-  | { type: typeof PopularAction.ADD_FAVOURITE; payload: string }
+  | {
+      type: typeof PopularAction.ADD_FAVOURITE;
+      payload: { id: string; title: string; author: string };
+    }
   | {
       type: typeof PopularAction.SET_STATUS;
       payload: { status: PopularAction; id: string };
