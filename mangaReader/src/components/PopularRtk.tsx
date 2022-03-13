@@ -18,8 +18,6 @@ export default function PopularRtk() {
         author: `BOB`,
       }),
     );
-
-    console.log(popularMangas);
   }, []);
 
   return <div>{popularMangas?.[0]?.id}</div>;

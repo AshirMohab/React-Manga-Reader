@@ -29,10 +29,6 @@ export default function MangaComponent() {
       console.log(covers);
       setCoverList(covers);
     });
-    {
-      console.log(coverList?.data[0]?.relationships[0]?.id);
-      console.log(coverList?.data[1]?.attributes.fileName);
-    }
   }, []);
 
   return (
@@ -41,10 +37,11 @@ export default function MangaComponent() {
       <h5 className="text-sm font-bold m-2">
         {getManga?.data?.attributes?.title?.en}
       </h5>
-
       <img
-        src={`https://uploads.mangadex.org/covers/${coverList?.data[3]?.relationships[0]?.id}/${coverList?.data[1]?.attributes.fileName}`}
+        src={`https://uploads.mangadex.org/covers/${coverList?.data[8]?.relationships[0]?.id}/${coverList?.data[8]?.attributes.fileName}`}
       />
+      {console.log(coverList?.data[0]?.relationships[0]?.id)}
+      {console.log(coverList?.data[1]?.attributes.fileName)}
     </div>
     // </div>
   );
