@@ -1,10 +1,10 @@
 export interface MangaObject {
   result: string;
   response: string;
-  data: Data;
+  data: MangaData;
 }
 
-interface Data {
+export interface MangaData {
   id: string;
   type: string;
   attributes: Attributes2;
