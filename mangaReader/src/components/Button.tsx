@@ -1,9 +1,7 @@
-export type ButtonProp = {
-  name: string;
-};
+import { ButtonProp } from "../props/componentProps";
 
-export default function ButtonComponent(prop: ButtonProp) {
-  const { name } = prop;
+export default function ButtonComponent(description: ButtonProp) {
+  const { name } = description;
   return (
     <button className="bg-blue-500 py-2 sm:py-3 px-6 rounded-lg shadow-lg shadow-glow text-white">
       {name}

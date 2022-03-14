@@ -20,5 +20,11 @@ export default function PopularRtk() {
     );
   }, []);
 
-  return <div>{popularMangas?.[0]?.id}</div>;
+  return (
+    <div>
+      Favourites
+      {popularMangas?.[0]?.id}
+      <div>{popularMangas?.[0]?.author}</div>
+    </div>
+  );
 }

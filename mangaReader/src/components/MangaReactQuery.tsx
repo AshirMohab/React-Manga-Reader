@@ -1,23 +1,14 @@
-import { useEffect, useState } from "react";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-  UseQueryResult,
-} from "react-query";
-import { retry } from "rxjs";
-import {
-  CoverByIDPromise,
-  getCoverListByID,
-  getMangasPromiseID,
-} from "../ApiCalls/apiCalls";
-import { CoverData, CoverObject, Relationship } from "../models/covers";
-import { MangaData, MangaObject } from "../models/mangaModel";
-import MangaComponent from "./MangaID";
+import { useQuery } from "react-query";
+import { CoverByIDPromise, getMangasPromiseID } from "../ApiCalls/apiCalls";
+import { CoverData } from "../models/covers";
+import { MangaData } from "../models/mangaModel";
+import { MangaCardProp } from "../props/componentProps";
+import ButtonComponent from "./Button";
 
-export function MangaCardReactQueryComponent() {
+export function MangaCardReactQueryComponent(Manga: MangaCardProp) {
+  const { id } = Manga;
   const mangaQuery = useQuery<MangaData, Error>(`manga`, () =>
-    getMangasPromiseID(`789642f8-ca89-4e4e-8f7b-eee4d17ea08b`),
+    getMangasPromiseID(id),
   );
 
   const mangaData = mangaQuery.data;
@@ -30,15 +21,33 @@ export function MangaCardReactQueryComponent() {
     { enabled: !!coverID },
   );
   const coverData = coverQuery.data;
+
+  // const chapterQuery = useQuery<ChapterData, Error>(`chapters`, () =>
+  //   getMangaChapters(id),
+  // );
+
+  // const chapters = chapterQuery.data;
+  // let description = mangaData?.attributes?.description?.en;
+  // const newDescription = description?.substring(0, description.indexOf("---"));
+
   return (
-    <div>
-      <h1>{mangaData?.attributes?.title.en}</h1>
-      <img
-        src={`https://uploads.mangadex.org/covers/${mangaData?.id}/${coverData?.attributes?.fileName}`}
-      />
-      <strong>👀 Big dongus chongus</strong>{" "}
-      <strong>✨ bigger dongus chongus</strong>{" "}
-      <strong>🍴 the biggest big dongus chongus</strong>
+    <div className="grid grid-cols-2">
+      <div className="p-6">
+        <h1>{mangaData?.attributes?.title.en}</h1>
+        <img
+          src={`https://uploads.mangadex.org/covers/${mangaData?.id}/${coverData?.attributes?.fileName}`}
+          width="50%"
+          height="100%"
+        />
+      </div>
+      <div className="flex flex-col gap-4">
+        <strong>Authour: {mangaData?.attributes?.title.en}</strong>{" "}
+        <strong>Status: {mangaData?.attributes?.status}</strong>{" "}
+        <strong>Date: {mangaData?.attributes?.createdAt}</strong>
+        <strong>Description: {mangaData?.attributes?.description?.en}</strong>
+        <ButtonComponent name="Add to favourites" />
+      </div>
+      <div></div>
     </div>
   );
 }
