@@ -86,8 +86,8 @@ export function CoverByIDPromise(id: string): Promise<CoverData> {
   return response;
 }
 
-export function getMangasPromise(): Promise<MangaObject> {
-  const response = fetch(`https://api.mangadex.org/manga`)
+export function getMangaPromise(): Promise<MangaData[]> {
+  const response = fetch(`https://api.mangadex.org/manga?limit=20`)
     .then((res) => res.json())
     .then((res) => res.data);
   return response;

@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { CoverByIDPromise, getMangasPromiseID } from "../ApiCalls/apiCalls";
 import { CoverData } from "../models/covers";
 import { MangaData } from "../models/mangaModel";
-import { MangaCardProp } from "../props/componentProps";
+import { MangaCardProp } from "../props/componentTypes";
 import ButtonComponent from "./Button";
 
 export function MangaCardReactQueryComponent(Manga: MangaCardProp) {

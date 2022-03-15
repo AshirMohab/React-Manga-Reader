@@ -1,22 +1,28 @@
 import { useQuery } from "react-query";
 import {
   CoverByIDPromise,
-  getMangasPromise,
+  getMangaPromise,
   getMangasPromiseID,
 } from "../ApiCalls/apiCalls";
 import { CoverData } from "../models/covers";
 import { MangaData, MangaObject } from "../models/mangaModel";
-import { singleMangaProp } from "../props/componentProps";
+import { singleMangaProp } from "../props/componentTypes";
 import ButtonComponent from "./Button";
 
 const SingleMangaComponent = (singleManga: singleMangaProp) => {
-  const { mangaId, title, coverFileName } = singleManga;
-
+  const { mangaId, title, coverID } = singleManga;
+  const coverQuery = useQuery<CoverData, Error>(
+    [`cover`, coverID],
+    () => CoverByIDPromise(coverID),
+    { enabled: !!coverID },
+  );
+  const coverData = coverQuery.data;
+  console.log(coverData);
   return (
     <div className="flex flex-col shadow rounded-2xl p-8 mb-4 bg-white">
       <h5 className="text-lg font-bold m-2">{title}</h5>
       <img
-        src={`https://uploads.mangadex.org/covers/${mangaId}/${coverFileName}`}
+        src={`https://uploads.mangadex.org/covers/${mangaId}/${coverData?.attributes.fileName}`}
         width="100%"
         height="auto"
       />
@@ -30,36 +36,29 @@ const SingleMangaComponent = (singleManga: singleMangaProp) => {
 };
 
 export default function MangaComponent() {
-  const mangaQuery = useQuery<MangaData, Error>(`manga`, () =>
-    getMangasPromiseID(`789642f8-ca89-4e4e-8f7b-eee4d17ea08b`),
+  const mangaListQuery = useQuery<MangaData[], Error>(`mangaList`, () =>
+    getMangaPromise(),
   );
+  const mangaListData = mangaListQuery.data;
 
-  // const mangaList = useQuery<MangaObject, Error>(`mangaList`, () =>
-  //   getMangasPromise(),
-  // );
-
-  // const mangasList = mangaList.data;
-
-  const mangaData = mangaQuery.data;
-
-  const coverID: string =
-    mangaData?.relationships.find(({ type }) => type === `cover_art`)?.id || "";
-
-  const coverQuery = useQuery<CoverData, Error>(
-    [`cover`, coverID],
-    () => CoverByIDPromise(coverID),
-    { enabled: !!coverID },
-  );
-
-  const coverData = coverQuery.data;
+  const isSuccess = mangaListQuery.isSuccess;
   return (
-    <div className="h-[100%] m-6 md:grid md:grid-cols-3 gap-16 md:grid-rows-2 justify-center flex flex-row">
+    <div>
       <div>
-        <SingleMangaComponent
-          mangaId={mangaData?.id}
-          title={mangaData?.attributes?.title?.en}
-          coverFileName={coverData?.attributes?.fileName}
-        />
+        {isSuccess &&
+          mangaListData?.map((manga) => {
+            return (
+              <SingleMangaComponent
+                mangaId={manga?.id}
+                title={manga?.attributes?.title?.en}
+                coverID={
+                  manga?.relationships.find(({ type }) => type === `cover_art`)
+                    ?.id || ""
+                }
+                key={manga?.id}
+              />
+            );
+          })}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { ButtonProp } from "../props/componentProps";
+import { ButtonProp } from "../props/componentTypes";
 
 export default function ButtonComponent(description: ButtonProp) {
   const { name } = description;

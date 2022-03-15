@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { LOADINGSTATE } from "../models/loadingState";
-
-export type HeadProps = {
-  tags: string[];
-};
-
-export type NavProps = {
-  name: string;
-};
+import { NavProps, HeadProps } from "../props/componentTypes";
 
 const Nav = (props: NavProps) => {
   const { name } = props;
