@@ -17,16 +17,15 @@ const SingleMangaComponent = (singleManga: singleMangaProp) => {
     { enabled: !!coverID },
   );
   const coverData = coverQuery.data;
-  console.log(coverData);
   return (
-    <div className="flex flex-col shadow rounded-2xl p-8 mb-4 bg-white">
+    <div className="flex flex-col shadow-lg rounded-2xl p-8 mb-4 bg-white">
       <h5 className="text-lg font-bold m-2">{title}</h5>
       <img
         src={`https://uploads.mangadex.org/covers/${mangaId}/${coverData?.attributes.fileName}`}
         width="100%"
         height="auto"
       />
-      <div className="flex flex-col buttons-container">
+      <div className="flex flex-col buttons-container pt-3">
         <ButtonComponent name="Add to Favourites" />
         <ButtonComponent name="I am curious" />
         <ButtonComponent name="Not interested" />
@@ -44,7 +43,7 @@ export default function MangaComponent() {
   const isSuccess = mangaListQuery.isSuccess;
   return (
     <div>
-      <div>
+      <div className="grid md:grid-cols-4 md:grid-rows-5 md:flex-row  sm:grid-cols-1 sm:flex-col gap-3 m-4">
         {isSuccess &&
           mangaListData?.map((manga) => {
             return (

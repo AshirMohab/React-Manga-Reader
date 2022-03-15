@@ -7,7 +7,7 @@ import { rtkstore } from "../reduxStore/rtkStore";
 import PopularRtk from "./PopularRtk";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { MangaCardReactQueryComponent } from "./MangaReactQuery";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 
 function App() {
   const queryClient = new QueryClient();
@@ -20,13 +20,29 @@ function App() {
             MANGADEX
           </div>
         </div>
-        <HeaderCard
+        {/* <HeaderCard
           tags={["Home", "Manga", "Favourites", "Genres", "Login", "Sign-up"]}
-        ></HeaderCard>
+        ></HeaderCard> */}
+        <div className="flex md:flex-row font-semibold text-sm items-center px-6 gap-5 sm:gap-24 sm:flex-col ">
+          <Link to="/" className="hover:text-blue-400">
+            Home
+          </Link>
+          <Link to="/" className="hover:text-blue-400">
+            Genres
+          </Link>
+          <Link to="manga-details" className="hover:text-blue-400">
+            Favourite
+          </Link>
+          <Link to="/" className="hover:text-blue-400">
+            Login
+          </Link>
+          <Link to="/" className="hover:text-blue-400">
+            Sign-up
+          </Link>
+        </div>
       </header>
       <div>
-        <div></div>
-        <div>
+        <div className="bg-slate-100">
           <QueryClientProvider client={queryClient}>
             <Provider store={rtkstore}>
               <Routes>

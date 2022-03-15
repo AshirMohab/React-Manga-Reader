@@ -22,16 +22,8 @@ export function MangaCardReactQueryComponent(Manga: MangaCardProp) {
   );
   const coverData = coverQuery.data;
 
-  // const chapterQuery = useQuery<ChapterData, Error>(`chapters`, () =>
-  //   getMangaChapters(id),
-  // );
-
-  // const chapters = chapterQuery.data;
-  // let description = mangaData?.attributes?.description?.en;
-  // const newDescription = description?.substring(0, description.indexOf("---"));
-
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid md:grid-cols-2 sm:grid-cols-1">
       <div className="p-6">
         <h1>{mangaData?.attributes?.title.en}</h1>
         <img

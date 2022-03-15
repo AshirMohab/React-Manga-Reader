@@ -1,10 +1,10 @@
 export interface ChapterObject {
   result: string;
   response: string;
-  data: Data;
+  data: ChapterData;
 }
 
-interface Data {
+interface ChapterData {
   id: string;
   type: string;
   attributes: Attributes;
