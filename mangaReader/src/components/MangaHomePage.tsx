@@ -24,6 +24,7 @@ const SingleMangaComponent = (singleManga: singleMangaProp) => {
         src={`https://uploads.mangadex.org/covers/${mangaId}/${coverData?.attributes.fileName}`}
         width="100%"
         height="auto"
+        alt={coverData?.attributes.fileName}
       />
       <div className="flex flex-col buttons-container pt-3">
         <ButtonComponent name="Add to Favourites" />

@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { rtkstore } from "../reduxStore/rtkStore";
 import PopularRtk from "./PopularRtk";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { MangaCardReactQueryComponent } from "./MangaReactQuery";
+import { MangaCardReactQueryComponent } from "./SpecificMangaPage";
 import { Link, Route, Routes } from "react-router-dom";
 
 function App() {

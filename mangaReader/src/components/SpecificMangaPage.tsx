@@ -23,16 +23,17 @@ export function MangaCardReactQueryComponent(Manga: MangaCardProp) {
   const coverData = coverQuery.data;
 
   return (
-    <div className="grid md:grid-cols-2 sm:grid-cols-1">
-      <div className="p-6">
+    <div className="grid md:grid-cols-2 sm:grid-cols-1 p-4">
+      <div className="p-6 bg-slate-300">
         <h1>{mangaData?.attributes?.title.en}</h1>
         <img
           src={`https://uploads.mangadex.org/covers/${mangaData?.id}/${coverData?.attributes?.fileName}`}
-          width="50%"
-          height="100%"
+          width="100%"
+          height="auto"
+          alt={mangaData?.attributes?.title.en}
         />
       </div>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 p-10 bg-slate-50">
         <strong>Authour: {mangaData?.attributes?.title.en}</strong>{" "}
         <strong>Status: {mangaData?.attributes?.status}</strong>{" "}
         <strong>Date: {mangaData?.attributes?.createdAt}</strong>
