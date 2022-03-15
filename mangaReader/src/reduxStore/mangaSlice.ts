@@ -30,8 +30,7 @@ export const mangaSlice = createSlice({
       const updateStatus = (
         status: MangaPopularityState,
         newStatus: MangaPopularityState,
-      ) =>
-        status === newStatus ? MangaPopularityState.NOTINTERESTED : newStatus;
+      ) => (status === newStatus ? MangaPopularityState.CURIOUS : newStatus);
 
       return [
         ...state.map((todo) =>

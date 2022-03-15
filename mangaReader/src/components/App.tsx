@@ -1,12 +1,13 @@
 import "../css/App.css";
 import React from "react";
 import HeaderCard from "./Header";
-import MangaComponent from "./MangaID";
+import MangaComponent from "./MangaHomePage";
 import { Provider } from "react-redux";
 import { rtkstore } from "../reduxStore/rtkStore";
 import PopularRtk from "./PopularRtk";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { MangaCardReactQueryComponent } from "./MangaReactQuery";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const queryClient = new QueryClient();
@@ -20,21 +21,25 @@ function App() {
           </div>
         </div>
         <HeaderCard
-          tags={["Home", "Manga", "18+", "Genres", "Login", "Sign-up"]}
+          tags={["Home", "Manga", "Favourites", "Genres", "Login", "Sign-up"]}
         ></HeaderCard>
       </header>
-      <div className="h-[100%] m-6 px-4 md:grid md:grid-cols-3 gap-16 md:grid-rows-2  justify-center flex flex-row">
-        {/* <div className="bg-slate-50 p-6">
-          <MangaComponent />
-        </div> */}
-        {/* <div>
-          <Provider store={rtkstore}>
-            <PopularRtk />
-          </Provider>
-        </div> */}
+      <div>
+        <div></div>
         <div>
           <QueryClientProvider client={queryClient}>
-            <MangaCardReactQueryComponent />
+            <Provider store={rtkstore}>
+              <Routes>
+                <Route path="/" element={<MangaComponent />} />
+                <Route
+                  path="manga-details"
+                  element={
+                    <MangaCardReactQueryComponent id="789642f8-ca89-4e4e-8f7b-eee4d17ea08b" />
+                  }
+                />
+                <Route path="favourites" element={<PopularRtk />} />
+              </Routes>
+            </Provider>
           </QueryClientProvider>
         </div>
       </div>

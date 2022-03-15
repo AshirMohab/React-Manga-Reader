@@ -1,5 +1,6 @@
 import React from "react";
 import { from, Observable, retry } from "rxjs";
+import { MangaVolumeData } from "../models/volumeModel";
 import { CoverListObject } from "../models/coverList";
 import { CoverData, CoverObject } from "../models/covers";
 import { MangaData, MangaObject } from "../models/mangaModel";
@@ -85,8 +86,8 @@ export function CoverByIDPromise(id: string): Promise<CoverData> {
   return response;
 }
 
-export function getMangasPromise(): Promise<MangaData> {
-  const response = fetch(`https://api.mangadex.org/manga`)
+export function getMangaPromise(): Promise<MangaData[]> {
+  const response = fetch(`https://api.mangadex.org/manga?limit=20`)
     .then((res) => res.json())
     .then((res) => res.data);
   return response;
@@ -94,6 +95,19 @@ export function getMangasPromise(): Promise<MangaData> {
 
 export function getMangasPromiseID(id: string): Promise<MangaData> {
   const response = fetch(`https://api.mangadex.org/manga/${id}`)
+    .then((res) => res.json())
+    .then((res) => res.data);
+  return response;
+}
+
+export function getMangaVolumes(id: string): Promise<MangaVolumeData> {
+  const response = fetch(`https://api.mangadex.org/manga/${id}/aggregate`)
+    .then((res) => res.json())
+    .then((res) => res.data);
+  return response;
+}
+export function getMangaChapters(id: string): Promise<MangaVolumeData> {
+  const response = fetch(`https://api.mangadex.org/chapter/${id}`)
     .then((res) => res.json())
     .then((res) => res.data);
   return response;
