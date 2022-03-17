@@ -1,25 +1,23 @@
 export interface MangaVolumeData {
   result: string;
-  volumes: Volumes;
+  volumes: MangaVolumes;
 }
 
-interface Volumes {
-  property1: Property12;
-  property2: Property12;
+export interface MangaVolumes {
+  [key: number]: Volume;
 }
 
-interface Property12 {
+interface Volume {
   volume: string;
   count: number;
   chapters: Chapters;
 }
 
 interface Chapters {
-  property1: Property1;
-  property2: Property1;
+  [key: number]: Chapter;
 }
 
-interface Property1 {
+interface Chapter {
   chapter: string;
   id: string;
   others: string[];

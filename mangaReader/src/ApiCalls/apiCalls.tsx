@@ -1,9 +1,10 @@
 import React from "react";
 import { from, Observable, retry } from "rxjs";
-import { MangaVolumeData } from "../models/volumeModel";
+import { MangaVolumeData, MangaVolumes } from "../models/volumeModel";
 import { CoverListObject } from "../models/coverList";
 import { CoverData, CoverObject } from "../models/covers";
 import { MangaData, MangaObject } from "../models/mangaModel";
+import { ChapterData } from "../models/chapterModel";
 
 // Bad way of using api calls. Observables bad.
 export function getMangas(): Observable<MangaObject[]> {
@@ -100,13 +101,16 @@ export function getMangasPromiseID(id: string): Promise<MangaData> {
   return response;
 }
 
-export function getMangaVolumes(id: string): Promise<MangaVolumeData> {
+export function getMangaVolumes(id: string): Promise<MangaVolumes> {
   const response = fetch(`https://api.mangadex.org/manga/${id}/aggregate`)
-    .then((res) => res.json())
-    .then((res) => res.data);
+    .then((res) => {
+      // console.log(res.json());
+      return res.json();
+    })
+    .then((res) => res.volumes);
   return response;
 }
-export function getMangaChapters(id: string): Promise<MangaVolumeData> {
+export function getMangaChapters(id: string): Promise<ChapterData> {
   const response = fetch(`https://api.mangadex.org/chapter/${id}`)
     .then((res) => res.json())
     .then((res) => res.data);

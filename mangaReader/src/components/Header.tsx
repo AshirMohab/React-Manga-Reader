@@ -11,7 +11,7 @@ export default function HearderCard(props: HeadProps) {
   const { tags } = props;
 
   return (
-    <ul className="flex flex-row font-semibold text-sm items-center px-6 gap-5 sm:gap-24">
+    <ul className="flex md:flex-row font-semibold text-sm items-center px-6 gap-5 sm:gap-24 sm:flex-col">
       {tags.map((tag) => (
         <Nav name={tag} key={tag} />
       ))}
