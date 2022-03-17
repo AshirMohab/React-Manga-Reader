@@ -4,7 +4,7 @@ export interface ChapterObject {
   data: ChapterData;
 }
 
-interface ChapterData {
+export interface ChapterData {
   id: string;
   type: string;
   attributes: Attributes;

@@ -1,5 +1,8 @@
+import { MouseEventHandler, ReactChild, ReactNode } from "react";
+
 export type ButtonProp = {
-  name: string;
+  children: ReactNode;
+  onClickProp: MouseEventHandler<HTMLButtonElement>;
 };
 
 export type MangaCardProp = {

@@ -1,4 +1,3 @@
-import "../css/App.css";
 import React from "react";
 import HeaderCard from "./Header";
 import MangaComponent from "./MangaHomePage";
@@ -8,9 +7,9 @@ import PopularRtk from "./PopularRtk";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { MangaCardReactQueryComponent } from "./SpecificMangaPage";
 import { Link, Route, Routes } from "react-router-dom";
+import ChaptersComponent from "./Chapters";
 
 function App() {
-  const queryClient = new QueryClient();
   return (
     <div className="grid grid-rows-1 w-[100%] h-[100%] bg-slate-100 ">
       <header className="my-6 flex flex-wrap items-center justify-center xl:justify-end">
@@ -30,7 +29,10 @@ function App() {
           <Link to="/" className="hover:text-blue-400">
             Genres
           </Link>
-          <Link to="manga-details" className="hover:text-blue-400">
+          <Link
+            to={`manga-details/${"789642f8-ca89-4e4e-8f7b-eee4d17ea08b"}`}
+            className="hover:text-blue-400"
+          >
             Favourite
           </Link>
           <Link to="/" className="hover:text-blue-400">
@@ -39,24 +41,28 @@ function App() {
           <Link to="/" className="hover:text-blue-400">
             Sign-up
           </Link>
+          <Link to="chapter" className="hover:text-blue-400">
+            Chapter
+          </Link>
         </div>
       </header>
       <div>
         <div className="bg-slate-100">
-          <QueryClientProvider client={queryClient}>
-            <Provider store={rtkstore}>
-              <Routes>
-                <Route path="/" element={<MangaComponent />} />
-                <Route
-                  path="manga-details"
-                  element={
-                    <MangaCardReactQueryComponent id="789642f8-ca89-4e4e-8f7b-eee4d17ea08b" />
-                  }
-                />
-                <Route path="favourites" element={<PopularRtk />} />
-              </Routes>
-            </Provider>
-          </QueryClientProvider>
+          <Routes>
+            <Route path="/" element={<MangaComponent />} />
+            <Route
+              path="manga-details/:mangaID"
+              element={<MangaCardReactQueryComponent />}
+            />
+            {/* localhost3000/manga/id */}
+            <Route path="favourites" element={<PopularRtk />} />
+            <Route
+              path="chapter"
+              element={
+                <ChaptersComponent id="789642f8-ca89-4e4e-8f7b-eee4d17ea08b" />
+              }
+            />
+          </Routes>
         </div>
       </div>
     </div>
