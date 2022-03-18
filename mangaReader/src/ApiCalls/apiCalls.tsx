@@ -116,3 +116,11 @@ export function getMangaChapters(id: string): Promise<ChapterData> {
     .then((res) => res.data);
   return response;
 }
+
+const mangadexUrl: string = `https://api.mangadex.org/`;
+const fetchCreator = (url: string): any => {
+  const response = fetch(`${mangadexUrl}${url}`)
+    .then((res) => res.json())
+    .then((res) => res.data);
+  return response;
+};

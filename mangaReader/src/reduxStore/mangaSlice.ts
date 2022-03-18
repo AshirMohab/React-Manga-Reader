@@ -10,48 +10,41 @@ export const mangaSlice = createSlice({
   reducers: {
     addFavourite: (
       state,
-      action: PayloadAction<{ id: string; coverUrl: string; author: string }>,
+      action: PayloadAction<{
+        mangaID: string;
+        coverID: string;
+        title: string;
+      }>,
     ) => {
+      if (state.some((manga) => manga.mangaID === action.payload.mangaID)) {
+        return state;
+      }
       return [
         ...state,
         {
-          id: action.payload.id,
-          coverUrl: action.payload.coverUrl,
-          author: action.payload.author,
+          mangaID: action.payload.mangaID,
+          coverID: action.payload.coverID,
+          title: action.payload.title,
           status: MangaPopularityState.FAVOURITE,
         },
       ];
     },
-    setStatus: (
-      state,
-      action: PayloadAction<{ id: string; status: MangaPopularityState }>,
-    ) => {
-      const { id, status } = action.payload;
-      const updateStatus = (
-        status: MangaPopularityState,
-        newStatus: MangaPopularityState,
-      ) => (status === newStatus ? MangaPopularityState.CURIOUS : newStatus);
-
-      return [
-        ...state.map((todo) =>
-          todo.id !== id
-            ? todo
-            : { ...todo, status: updateStatus(todo.status, status) },
-        ),
-      ];
-    },
+    removeFavourite: (state, action: PayloadAction<{ id: string }>) =>
+      state.filter((manga) => manga.mangaID !== action.payload.id),
   },
 });
 
-export const { addFavourite, setStatus } = mangaSlice.actions;
+export const { addFavourite, removeFavourite } = mangaSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectPopularMangas = (state: RootState) =>
-  state.mangaPopylarities;
+  state.mangaPopularities;
 export const selectPopularMangasID = (state: RootState, id: string) =>
-  state.mangaPopylarities.find((manga: { id: string }) => manga.id === id);
+  state.mangaPopularities.find(
+    (manga: { mangaID: string }) => manga.mangaID === id,
+  );
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

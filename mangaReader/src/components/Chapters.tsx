@@ -6,8 +6,20 @@ import {
 } from "../ApiCalls/apiCalls";
 import { ChapterData } from "../models/chapterModel";
 import { MangaData } from "../models/mangaModel";
-import { MangaVolumeData, MangaVolumes } from "../models/volumeModel";
-import { MangaCardProp } from "../props/componentTypes";
+import { MangaVolumeData, MangaVolumes, Volume } from "../models/volumeModel";
+import {
+  ChapterCardProp,
+  MangaCardProp,
+} from "../componentTypes/componentTypes";
+
+const Chapter = (props: ChapterCardProp) => {
+  const { id } = props;
+  const chapterQuery = useQuery<ChapterData, Error>([`chapters`, id], () =>
+    getMangaChapters(id),
+  );
+  const chapters = chapterQuery.data;
+  return <div>{JSON.stringify(chapters)}</div>;
+};
 
 export default function ChaptersComponent(props: MangaCardProp) {
   const { id } = props;
@@ -22,21 +34,7 @@ export default function ChaptersComponent(props: MangaCardProp) {
     () => getMangaVolumes(id),
   );
 
-  console.log(mangaVolumeQuery);
-  const volumeData = mangaVolumeQuery?.data;
-  console.log(volumeData);
-  if (volumeData) {
-    console.log("I have data");
-  } else {
-    console.log(volumeData);
-    console.log("NO data");
-  }
-
-  // const chapterQuery = useQuery<ChapterData, Error>(`chapters`, () =>
-  //   getMangaChapters(""),
-  // );
-
-  // const chapters = chapterQuery.data;
+  const volumeData = mangaVolumeQuery?.data as MangaVolumes;
 
   return (
     <div>

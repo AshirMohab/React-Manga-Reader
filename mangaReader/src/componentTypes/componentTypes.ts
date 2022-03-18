@@ -8,6 +8,9 @@ export type ButtonProp = {
 export type MangaCardProp = {
   id: string;
 };
+export type ChapterCardProp = {
+  id: string;
+};
 
 export type singleMangaProp = {
   mangaId: string;
