@@ -25,9 +25,6 @@ function App() {
           <Link to="/sign-up" className="hover:text-blue-400">
             Sign-up
           </Link>
-          <Link to="chapter" className="hover:text-blue-400 p-4 m-4">
-            Chapter
-          </Link>
         </div>
       </header>
       <div>
@@ -44,12 +41,6 @@ function App() {
             />
             {/* localhost3000/manga/id */}
             <Route path="favourites" element={<PopularRtk />} />
-            <Route
-              path="chapter"
-              element={
-                <ChaptersComponent id="789642f8-ca89-4e4e-8f7b-eee4d17ea08b" />
-              }
-            />
             <Route path="sign-up" element={<SignUp />} />
           </Routes>
         </div>
