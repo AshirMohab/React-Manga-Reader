@@ -3,7 +3,7 @@ import mangaPopularityReducer from "./mangaSlice";
 
 export const rtkstore = configureStore({
   reducer: {
-    mangaPopylarities: mangaPopularityReducer,
+    mangaPopularities: mangaPopularityReducer,
   },
 });
 

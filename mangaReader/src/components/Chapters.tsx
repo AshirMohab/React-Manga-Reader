@@ -18,8 +18,7 @@ const Chapter = (props: ChapterCardProp) => {
     getMangaChapters(id),
   );
   const chapters = chapterQuery.data;
-  console.log(chapters);
-  return <div>{chapters}</div>;
+  return <div>{JSON.stringify(chapters)}</div>;
 };
 
 export default function ChaptersComponent(props: MangaCardProp) {

@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../reduxStore/rtkStore";
-import { addFavourite, setStatus } from "../reduxStore/mangaSlice";
-import { MangaPopularityState } from "../reduxStore/types";
 import { useQuery } from "react-query";
 import { CoverByIDPromise } from "../ApiCalls/apiCalls";
 import { singleMangaProp } from "../componentTypes/componentTypes";
@@ -48,7 +46,7 @@ const FavouriteMangaComponent = (props: singleMangaProp) => {
 
 export default function PopularRtk() {
   const popularMangas = useSelector(
-    (state: RootState) => state.mangaPopylarities,
+    (state: RootState) => state.mangaPopularities,
   );
 
   return (

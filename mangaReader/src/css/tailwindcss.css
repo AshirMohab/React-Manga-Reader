@@ -2,21 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .buttons-container {
   gap: 15px;
-  margin-top: 15px;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-700 py-2 sm:py-3 px-6 rounded-lg  text-blue-100 font-semibold;
+  }
 }

@@ -5,9 +5,11 @@ import { CoverData } from "../models/covers";
 import { MangaData } from "../models/mangaModel";
 import { MangaCardProp } from "../componentTypes/componentTypes";
 import ButtonComponent from "./Button";
-import { useDispatch } from "react-redux";
-import { addFavourite } from "../reduxStore/mangaSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavourite, removeFavourite } from "../reduxStore/mangaSlice";
 import { Store } from "react-notifications-component";
+import { MdOutlineFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
+import { RootState } from "../reduxStore/rtkStore";
 
 export function MangaCardReactQueryComponent() {
   const params = useParams();
@@ -18,6 +20,9 @@ export function MangaCardReactQueryComponent() {
     getMangasPromiseID(mangaID),
   );
 
+  const isFavourite = useSelector((state: RootState) =>
+    state.mangaPopularities.some((manga) => manga.mangaID === mangaID),
+  );
   const mangaData = mangaQuery.data;
   const coverID: string =
     mangaData?.relationships.find(({ type }) => type === `cover_art`)?.id || "";
@@ -29,6 +34,49 @@ export function MangaCardReactQueryComponent() {
   );
   const coverData = coverQuery.data;
   const title = mangaData?.attributes?.title.en || "";
+  function handleFavouriteClick() {
+    if (isFavourite) {
+      dispatch(
+        removeFavourite({
+          id: mangaID,
+        }),
+      ),
+        Store.addNotification({
+          title: "Removed from Favourites",
+          message: `${title} has been removed from favourites`,
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 3000,
+            onScreen: true,
+          },
+        });
+    } else {
+      dispatch(
+        addFavourite({
+          mangaID: mangaID,
+          coverID: coverID,
+          title: title,
+        }),
+      ),
+        Store.addNotification({
+          title: "Added to Favourites",
+          message: `${title} has been added to favourites`,
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 3000,
+            onScreen: true,
+          },
+        });
+    }
+  }
   return (
     <div className="grid md:grid-cols-2 sm:grid-cols-1 p-4">
       <div className="p-6 rounded-lg">
@@ -41,7 +89,7 @@ export function MangaCardReactQueryComponent() {
         />
       </div>
       <div className="flex flex-col gap-4 p-10 bg-slate-50 rounded-xl">
-        <strong>Authour: {title}</strong>{" "}
+        <strong>Author: {title}</strong>{" "}
         <strong>Status: {mangaData?.attributes?.status}</strong>{" "}
         <strong>Date: {mangaData?.attributes?.createdAt}</strong>
         <strong>Description: {mangaData?.attributes?.description?.en}</strong>
@@ -50,31 +98,14 @@ export function MangaCardReactQueryComponent() {
         </strong>
         <strong>Catergories: {mangaData?.attributes?.contentRating}</strong>
         <div className="flex flex-row gap-2">
-          <ButtonComponent
-            children="Add to favourites"
-            onClickProp={() => {
-              dispatch(
-                addFavourite({
-                  mangaID: mangaID,
-                  coverID: coverID,
-                  title: title,
-                }),
-              ),
-                Store.addNotification({
-                  title: "Added to Favourites",
-                  message: `${title} has been added to favourites`,
-                  type: "success",
-                  insert: "top",
-                  container: "top-right",
-                  animationIn: ["animate__animated", "animate__fadeIn"],
-                  animationOut: ["animate__animated", "animate__fadeOut"],
-                  dismiss: {
-                    duration: 3000,
-                    onScreen: true,
-                  },
-                });
-            }}
-          />
+          <button onClick={() => handleFavouriteClick()}>
+            {isFavourite ? (
+              <MdOutlineFavorite className="h-12 w-12 text-pink-400" />
+            ) : (
+              <MdOutlineFavoriteBorder className="h-12 w-12 text-pink-400" />
+            )}
+          </button>
+
           <ButtonComponent
             children="Read First"
             onClickProp={() => console.log("The blue sky")}
