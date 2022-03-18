@@ -7,6 +7,7 @@ import { MangaCardProp } from "../componentTypes/componentTypes";
 import ButtonComponent from "./Button";
 import { useDispatch } from "react-redux";
 import { addFavourite } from "../reduxStore/mangaSlice";
+import { Store } from "react-notifications-component";
 
 export function MangaCardReactQueryComponent() {
   const params = useParams();
@@ -51,15 +52,28 @@ export function MangaCardReactQueryComponent() {
         <div className="flex flex-row gap-2">
           <ButtonComponent
             children="Add to favourites"
-            onClickProp={() =>
+            onClickProp={() => {
               dispatch(
                 addFavourite({
                   mangaID: mangaID,
                   coverID: coverID,
                   title: title,
                 }),
-              )
-            }
+              ),
+                Store.addNotification({
+                  title: "Added to Favourites",
+                  message: `${title} has been added to favourites`,
+                  type: "success",
+                  insert: "top",
+                  container: "top-right",
+                  animationIn: ["animate__animated", "animate__fadeIn"],
+                  animationOut: ["animate__animated", "animate__fadeOut"],
+                  dismiss: {
+                    duration: 3000,
+                    onScreen: true,
+                  },
+                });
+            }}
           />
           <ButtonComponent
             children="Read First"

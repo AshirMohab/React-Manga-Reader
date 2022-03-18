@@ -12,6 +12,7 @@ import ButtonComponent from "./Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavourite } from "../reduxStore/mangaSlice";
 import { RootState, rtkstore } from "../reduxStore/rtkStore";
+import { Store } from "react-notifications-component";
 
 const SingleMangaComponent = (props: singleMangaProp) => {
   const { mangaId, title, coverID } = props;
@@ -59,7 +60,20 @@ const SingleMangaComponent = (props: singleMangaProp) => {
                     coverID: coverID,
                     title: title,
                   }),
-                );
+                ),
+                  Store.addNotification({
+                    title: "Added to Favourites",
+                    message: `${title} has been added to favourites`,
+                    type: "success",
+                    insert: "top",
+                    container: "top-right",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    dismiss: {
+                      duration: 3000,
+                      onScreen: true,
+                    },
+                  });
               }}
             />
           </div>
