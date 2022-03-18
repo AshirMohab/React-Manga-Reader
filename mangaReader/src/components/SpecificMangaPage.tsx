@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CoverByIDPromise, getMangasPromiseID } from "../ApiCalls/apiCalls";
 import { CoverData } from "../models/covers";
 import { MangaData } from "../models/mangaModel";
@@ -15,7 +15,7 @@ export function MangaCardReactQueryComponent() {
   const params = useParams();
   const mangaID = params.mangaID as string;
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const mangaQuery = useQuery<MangaData, Error>([`manga`, mangaID], () =>
     getMangasPromiseID(mangaID),
   );
@@ -127,7 +127,7 @@ export function MangaCardReactQueryComponent() {
 
           <ButtonComponent
             children="Read First"
-            onClickProp={() => console.log("The blue sky")}
+            onClickProp={() => navigate("/")}
           />
         </div>
       </div>

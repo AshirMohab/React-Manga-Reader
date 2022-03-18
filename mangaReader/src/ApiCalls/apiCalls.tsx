@@ -104,7 +104,6 @@ export function getMangasPromiseID(id: string): Promise<MangaData> {
 export function getMangaVolumes(id: string): Promise<MangaVolumes> {
   const response = fetch(`https://api.mangadex.org/manga/${id}/aggregate`)
     .then((res) => {
-      // console.log(res.json());
       return res.json();
     })
     .then((res) => res.volumes);
