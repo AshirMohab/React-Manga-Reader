@@ -60,7 +60,6 @@ const SingleMangaComponent = (props: singleMangaProp) => {
                     title: title,
                   }),
                 );
-                console.log(popularMangas);
               }}
             />
           </div>

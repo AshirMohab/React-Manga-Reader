@@ -5,10 +5,13 @@ import { CoverData } from "../models/covers";
 import { MangaData } from "../models/mangaModel";
 import { MangaCardProp } from "../componentTypes/componentTypes";
 import ButtonComponent from "./Button";
+import { useDispatch } from "react-redux";
+import { addFavourite } from "../reduxStore/mangaSlice";
 
 export function MangaCardReactQueryComponent() {
   const params = useParams();
   const mangaID = params.mangaID as string;
+  const dispatch = useDispatch();
 
   const mangaQuery = useQuery<MangaData, Error>([`manga`, mangaID], () =>
     getMangasPromiseID(mangaID),
@@ -24,7 +27,7 @@ export function MangaCardReactQueryComponent() {
     { enabled: !!coverID },
   );
   const coverData = coverQuery.data;
-
+  const title = mangaData?.attributes?.title.en || "";
   return (
     <div className="grid md:grid-cols-2 sm:grid-cols-1 p-4">
       <div className="p-6 rounded-lg">
@@ -37,7 +40,7 @@ export function MangaCardReactQueryComponent() {
         />
       </div>
       <div className="flex flex-col gap-4 p-10 bg-slate-50 rounded-xl">
-        <strong>Authour: {mangaData?.attributes?.title.en}</strong>{" "}
+        <strong>Authour: {title}</strong>{" "}
         <strong>Status: {mangaData?.attributes?.status}</strong>{" "}
         <strong>Date: {mangaData?.attributes?.createdAt}</strong>
         <strong>Description: {mangaData?.attributes?.description?.en}</strong>
@@ -48,7 +51,15 @@ export function MangaCardReactQueryComponent() {
         <div className="flex flex-row gap-2">
           <ButtonComponent
             children="Add to favourites"
-            onClickProp={() => console.log("The blue sky")}
+            onClickProp={() =>
+              dispatch(
+                addFavourite({
+                  mangaID: mangaID,
+                  coverID: coverID,
+                  title: title,
+                }),
+              )
+            }
           />
           <ButtonComponent
             children="Read First"
