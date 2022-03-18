@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import { ButtonProp } from "../props/componentTypes";
+import { ButtonProp } from "../componentTypes/componentTypes";
 
 export default function ButtonComponent(props: ButtonProp) {
   //children as props.

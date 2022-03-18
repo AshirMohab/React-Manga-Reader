@@ -7,7 +7,7 @@ import {
 import { ChapterData } from "../models/chapterModel";
 import { MangaData } from "../models/mangaModel";
 import { MangaVolumeData, MangaVolumes } from "../models/volumeModel";
-import { MangaCardProp } from "../props/componentTypes";
+import { MangaCardProp } from "../componentTypes/componentTypes";
 
 export default function ChaptersComponent(props: MangaCardProp) {
   const { id } = props;

@@ -29,10 +29,7 @@ function App() {
           <Link to="/" className="hover:text-blue-400">
             Genres
           </Link>
-          <Link
-            to={`manga-details/${"789642f8-ca89-4e4e-8f7b-eee4d17ea08b"}`}
-            className="hover:text-blue-400"
-          >
+          <Link to="favourites" className="hover:text-blue-400">
             Favourite
           </Link>
           <Link to="/" className="hover:text-blue-400">
@@ -52,6 +49,10 @@ function App() {
             <Route path="/" element={<MangaComponent />} />
             <Route
               path="manga-details/:mangaID"
+              element={<MangaCardReactQueryComponent />}
+            />
+            <Route
+              path="favourites/manga-details/:mangaID"
               element={<MangaCardReactQueryComponent />}
             />
             {/* localhost3000/manga/id */}

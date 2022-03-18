@@ -10,14 +10,18 @@ export const mangaSlice = createSlice({
   reducers: {
     addFavourite: (
       state,
-      action: PayloadAction<{ id: string; coverUrl: string; author: string }>,
+      action: PayloadAction<{
+        mangaID: string;
+        coverID: string;
+        title: string;
+      }>,
     ) => {
       return [
         ...state,
         {
-          id: action.payload.id,
-          coverUrl: action.payload.coverUrl,
-          author: action.payload.author,
+          mangaID: action.payload.mangaID,
+          coverID: action.payload.coverID,
+          title: action.payload.title,
           status: MangaPopularityState.FAVOURITE,
         },
       ];
@@ -34,7 +38,7 @@ export const mangaSlice = createSlice({
 
       return [
         ...state.map((todo) =>
-          todo.id !== id
+          todo.mangaID !== id
             ? todo
             : { ...todo, status: updateStatus(todo.status, status) },
         ),
@@ -51,7 +55,9 @@ export const { addFavourite, setStatus } = mangaSlice.actions;
 export const selectPopularMangas = (state: RootState) =>
   state.mangaPopylarities;
 export const selectPopularMangasID = (state: RootState, id: string) =>
-  state.mangaPopylarities.find((manga: { id: string }) => manga.id === id);
+  state.mangaPopylarities.find(
+    (manga: { mangaID: string }) => manga.mangaID === id,
+  );
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

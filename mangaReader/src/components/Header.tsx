@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LOADINGSTATE } from "../models/loadingState";
-import { NavProps, HeadProps } from "../props/componentTypes";
+import { NavProps, HeadProps } from "../componentTypes/componentTypes";
 
 const Nav = (props: NavProps) => {
   const { name } = props;
