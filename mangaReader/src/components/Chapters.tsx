@@ -6,8 +6,21 @@ import {
 } from "../ApiCalls/apiCalls";
 import { ChapterData } from "../models/chapterModel";
 import { MangaData } from "../models/mangaModel";
-import { MangaVolumeData, MangaVolumes } from "../models/volumeModel";
-import { MangaCardProp } from "../componentTypes/componentTypes";
+import { MangaVolumeData, MangaVolumes, Volume } from "../models/volumeModel";
+import {
+  ChapterCardProp,
+  MangaCardProp,
+} from "../componentTypes/componentTypes";
+
+const Chapter = (props: ChapterCardProp) => {
+  const { id } = props;
+  const chapterQuery = useQuery<ChapterData, Error>([`chapters`, id], () =>
+    getMangaChapters(id),
+  );
+  const chapters = chapterQuery.data;
+  console.log(chapters);
+  return <div>{chapters}</div>;
+};
 
 export default function ChaptersComponent(props: MangaCardProp) {
   const { id } = props;
@@ -22,21 +35,12 @@ export default function ChaptersComponent(props: MangaCardProp) {
     () => getMangaVolumes(id),
   );
 
-  console.log(mangaVolumeQuery);
-  const volumeData = mangaVolumeQuery?.data;
-  console.log(volumeData);
+  const volumeData = mangaVolumeQuery?.data as MangaVolumes;
   if (volumeData) {
-    console.log("I have data");
   } else {
     console.log(volumeData);
     console.log("NO data");
   }
-
-  // const chapterQuery = useQuery<ChapterData, Error>(`chapters`, () =>
-  //   getMangaChapters(""),
-  // );
-
-  // const chapters = chapterQuery.data;
 
   return (
     <div>
@@ -49,6 +53,11 @@ export default function ChaptersComponent(props: MangaCardProp) {
         The blue sky
         <div className="bg-red-300">The green grass</div>
         <div className="bg-red-300">{mangaData?.attributes?.title?.en}</div>
+        {mangaQuery.isSuccess && (
+          <div>
+            <Chapter id={volumeData[1]?.chapters[1]?.id} />
+          </div>
+        )}
       </div>
       <div className="bg-blue-200">
         The blue sky

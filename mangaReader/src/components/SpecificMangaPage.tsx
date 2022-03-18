@@ -79,10 +79,6 @@ export function MangaCardReactQueryComponent() {
             children="Read First"
             onClickProp={() => console.log("The blue sky")}
           />
-          <ButtonComponent
-            children="Read Last"
-            onClickProp={() => console.log("The blue sky")}
-          />
         </div>
       </div>
     </div>
