@@ -46,7 +46,7 @@ const SingleMangaComponent = (props: singleMangaProp) => {
           animationIn: ["animate__animated", "animate__fadeIn"],
           animationOut: ["animate__animated", "animate__fadeOut"],
           dismiss: {
-            duration: 3000,
+            duration: 2000,
             onScreen: true,
           },
         });
@@ -89,15 +89,15 @@ const SingleMangaComponent = (props: singleMangaProp) => {
             width="100%"
             height="auto"
             alt={coverData?.attributes.fileName}
-            // onClick={navigate(`manga-details/${mangaId}`)}
           />
-          <div className="flex flex-col buttons-container pt-3 mt-auto">
+          <div className="flex flex-col buttons-container pt-3 mt-auto text-transparent">
             <button onClick={() => handleFavouriteClick()} className="ml-auto">
               {isFavourite ? (
                 <MdOutlineFavorite className="h-8 w-8 text-pink-400" />
               ) : (
                 <MdOutlineFavoriteBorder className="h-8 w-8 text-slate-400" />
               )}
+              Favourite
             </button>
             <ButtonComponent
               children={"Read Manga"}

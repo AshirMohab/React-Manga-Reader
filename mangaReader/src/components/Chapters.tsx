@@ -35,11 +35,6 @@ export default function ChaptersComponent(props: MangaCardProp) {
   );
 
   const volumeData = mangaVolumeQuery?.data as MangaVolumes;
-  if (volumeData) {
-  } else {
-    console.log(volumeData);
-    console.log("NO data");
-  }
 
   return (
     <div>
@@ -52,11 +47,6 @@ export default function ChaptersComponent(props: MangaCardProp) {
         The blue sky
         <div className="bg-red-300">The green grass</div>
         <div className="bg-red-300">{mangaData?.attributes?.title?.en}</div>
-        {mangaQuery.isSuccess && (
-          <div>
-            <Chapter id={volumeData[1]?.chapters[1]?.id} />
-          </div>
-        )}
       </div>
       <div className="bg-blue-200">
         The blue sky

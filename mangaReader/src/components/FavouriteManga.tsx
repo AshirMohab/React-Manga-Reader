@@ -27,10 +27,10 @@ const FavouriteMangaComponent = (props: singleMangaProp) => {
       {coverIsSuccess && (
         <button
           type="button"
-          className="flex flex-col shadow-lg rounded-2xl p-8 mb-4 bg-white hover:shadow-2xl hover:shadow-black hover:cursor-pointer"
+          className="flex flex-col shadow-md rounded-2xl p-8 mb-4 bg-white hover:shadow-lg hover:shadow-black hover:cursor-pointer"
           onClick={() => navigate(`manga-details/${mangaId}`)}
         >
-          <h5 className="text-lg font-bold m-2">{title}</h5>
+          <h2 className="text-lg font-bold m-2">{title}</h2>
           <img
             src={`https://uploads.mangadex.org/covers/${mangaId}/${coverData?.attributes.fileName}`}
             width="100%"
@@ -51,19 +51,25 @@ export default function PopularRtk() {
 
   return (
     <div>
-      <h1>Favourites</h1>
-      <div className="grid md:grid-cols-4 md:grid-rows-5 md:flex-row  sm:grid-cols-1 sm:flex-col gap-3 m-4 ">
-        {popularMangas.map((manga) => {
-          return (
-            <FavouriteMangaComponent
-              mangaId={manga.mangaID}
-              title={manga.title}
-              coverID={manga.coverID}
-              key={manga.mangaID}
-            />
-          );
-        })}
-      </div>
+      {popularMangas[0] !== null && (
+        <div>
+          <h1 className="text-lg font-bold p-4 justify-center">
+            Favourite Manga
+          </h1>
+          <div className="grid md:grid-cols-4 md:grid-rows-5 md:flex-row  sm:grid-cols-1 sm:flex-col gap-3 m-4 ">
+            {popularMangas.map((manga) => {
+              return (
+                <FavouriteMangaComponent
+                  mangaId={manga.mangaID}
+                  title={manga.title}
+                  coverID={manga.coverID}
+                  key={manga.mangaID}
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
